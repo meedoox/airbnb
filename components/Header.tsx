@@ -8,12 +8,23 @@ import { DateRangePicker } from 'react-date-range'
 
 type Props = {}
 
+type Selection = {
+	endDate: Date
+	startDate: Date
+	key: string
+}
+
+type Ranges = {
+	selection: Selection
+}
+
 export default function Header({}: Props) {
 	const [searchInput, setSearchInput] = useState('')
 	const [startDate, setStartDate] = useState(new Date())
 	const [endDate, setEndDate] = useState(new Date())
 
-	const handleSelect = (ranges) => {
+	const handleSelect = (ranges: Ranges) => {
+		console.log(ranges)
 		setStartDate(ranges.selection.startDate)
 		setEndDate(ranges.selection.endDate)
 	}
