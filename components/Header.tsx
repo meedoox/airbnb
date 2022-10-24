@@ -12,6 +12,12 @@ export default function Header({}: Props) {
 	const [searchInput, setSearchInput] = useState('')
 	const [startDate, setStartDate] = useState(new Date())
 	const [endDate, setEndDate] = useState(new Date())
+
+	const handleSelect = (ranges) => {
+		setStartDate(ranges.selection.startDate)
+		setEndDate(ranges.selection.endDate)
+	}
+
 	const selectionRange = {
 		startDate: startDate,
 		endDate: endDate,
@@ -49,8 +55,13 @@ export default function Header({}: Props) {
 			</div>
 
 			{searchInput && (
-				<div>
-					<DateRangePicker ranges={[selectionRange]} />
+				<div className="flex flex-col col-span-3 mx-auto mt-5">
+					<DateRangePicker
+						ranges={[selectionRange]}
+						minDate={new Date()}
+						rangeColors={['#FD5B61']}
+						onChange={handleSelect}
+					/>
 				</div>
 			)}
 		</header>
