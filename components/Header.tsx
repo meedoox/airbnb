@@ -26,7 +26,7 @@ export default function Header({}: Props) {
 			{/* Right */}
 			<div className="flex space-x-4 items-center justify-end text-gray-500">
 				<p className="hidden md:inline-flex cursor-pointer">Become a host</p>
-				<GlobeAltIcon className="h-6 cursor-pointer" />
+				<GlobeAltIcon className=" hidden sm:inline-flex h-6 w-6 cursor-pointer" />
 
 				<div className="flex items-center space-x-2 border-2 rounded-full p-2">
 					<Bars3Icon className="h-6 cursor-pointer" />
