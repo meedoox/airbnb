@@ -4,29 +4,22 @@ import { MagnifyingGlassIcon, Bars3Icon, UserIcon, GlobeAltIcon } from '@heroico
 import { UserCircleIcon } from '@heroicons/react/24/solid'
 import 'react-date-range/dist/styles.css' // main style file
 import 'react-date-range/dist/theme/default.css' // theme css file
-import { DateRangePicker } from 'react-date-range'
+import { DateRange, DateRangePicker, DateRangePickerProps, DateRangeProps, RangeKeyDict } from 'react-date-range'
 
 type Props = {}
 
-type Selection = {
-	endDate: Date
-	startDate: Date
-	key: string
-}
-
-type Ranges = {
-	selection: Selection
-}
-
 export default function Header({}: Props) {
 	const [searchInput, setSearchInput] = useState('')
-	const [startDate, setStartDate] = useState(new Date())
-	const [endDate, setEndDate] = useState(new Date())
+	const [startDate, setStartDate] = useState<Date>(new Date())
+	const [endDate, setEndDate] = useState<Date>(new Date())
 
-	const handleSelect = (ranges: Ranges) => {
-		console.log(ranges)
-		setStartDate(ranges.selection.startDate)
-		setEndDate(ranges.selection.endDate)
+	const handleSelect = ({ selection }: RangeKeyDict) => {
+		if (selection.startDate === undefined || selection.endDate === undefined) {
+			return
+		}
+
+		setStartDate(selection.startDate)
+		setEndDate(selection.endDate)
 	}
 
 	const selectionRange = {

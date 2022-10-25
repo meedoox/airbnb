@@ -8,6 +8,8 @@
   "dependencies": {
     "@heroicons/react": "^2.0.12",
     "@types/react-date-range": "^1.4.4",
+    "@types/wojtekmaj__react-daterange-picker": "^3.4.1",
+    "@wojtekmaj/react-daterange-picker": "^4.0.0",
     "date-fns": "^2.29.3",
     "next": "latest",
     "react": "^18.2.0",
