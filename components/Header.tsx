@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
-import { MagnifyingGlassIcon, Bars3Icon, UserIcon, GlobeAltIcon } from '@heroicons/react/24/outline'
-import { UserCircleIcon } from '@heroicons/react/24/solid'
+import { MagnifyingGlassIcon, Bars3Icon, GlobeAltIcon } from '@heroicons/react/24/outline'
+import { UserCircleIcon, UsersIcon } from '@heroicons/react/24/solid'
 import 'react-date-range/dist/styles.css' // main style file
 import 'react-date-range/dist/theme/default.css' // theme css file
 import { DateRange, DateRangePicker, DateRangePickerProps, DateRangeProps, RangeKeyDict } from 'react-date-range'
@@ -12,6 +12,7 @@ export default function Header({}: Props) {
 	const [searchInput, setSearchInput] = useState('')
 	const [startDate, setStartDate] = useState<Date>(new Date())
 	const [endDate, setEndDate] = useState<Date>(new Date())
+	const [noOfGuests, setNoOfGuests] = useState(1)
 
 	const handleSelect = ({ selection }: RangeKeyDict) => {
 		if (selection.startDate === undefined || selection.endDate === undefined) {
@@ -20,6 +21,10 @@ export default function Header({}: Props) {
 
 		setStartDate(selection.startDate)
 		setEndDate(selection.endDate)
+	}
+
+	const resetInput = () => {
+		setSearchInput('')
 	}
 
 	const selectionRange = {
@@ -66,6 +71,24 @@ export default function Header({}: Props) {
 						rangeColors={['#FD5B61']}
 						onChange={handleSelect}
 					/>
+					<div className="flex items-center border-b mb-4">
+						<h2 className="text-2xl flex-grow font-semibold">Number of Guests</h2>
+						<UsersIcon className="h-5" />
+
+						<input
+							min="1"
+							type="number"
+							className="w-12 pl-2 text-lg outline-none text-red-400"
+							value={noOfGuests}
+							onChange={(e) => setNoOfGuests(parseInt(e.target.value))}
+						/>
+					</div>
+					<div className="flex">
+						<button className="flex-grow text-gray-500" onClick={resetInput}>
+							Cancel
+						</button>
+						<button className="flex-grow text-red-400">Search</button>
+					</div>
 				</div>
 			)}
 		</header>
