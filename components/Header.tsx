@@ -29,6 +29,10 @@ export default function Header({}: Props) {
 		setSearchInput('')
 	}
 
+	const search = () => {
+		router.push('/search')
+	}
+
 	const selectionRange = {
 		startDate: startDate,
 		endDate: endDate,
@@ -89,7 +93,9 @@ export default function Header({}: Props) {
 						<button className="flex-grow text-gray-500" onClick={resetInput}>
 							Cancel
 						</button>
-						<button className="flex-grow text-red-400">Search</button>
+						<button onClick={search} className="flex-grow text-red-400">
+							Search
+						</button>
 					</div>
 				</div>
 			)}
