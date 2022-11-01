@@ -7,9 +7,11 @@ import 'react-date-range/dist/theme/default.css' // theme css file
 import { DateRange, DateRangePicker, DateRangePickerProps, DateRangeProps, RangeKeyDict } from 'react-date-range'
 import { useRouter } from 'next/router'
 
-type Props = {}
+type Props = {
+	placeholder: string
+}
 
-export default function Header({}: Props) {
+export default function Header({ placeholder }: Props) {
 	const [searchInput, setSearchInput] = useState('')
 	const [startDate, setStartDate] = useState<Date>(new Date())
 	const [endDate, setEndDate] = useState<Date>(new Date())
@@ -30,7 +32,15 @@ export default function Header({}: Props) {
 	}
 
 	const search = () => {
-		router.push('/search')
+		router.push({
+			pathname: '/search',
+			query: {
+				location: searchInput,
+				startDate: startDate.toISOString(),
+				endDate: endDate.toISOString(),
+				noOfGuests,
+			},
+		})
 	}
 
 	const selectionRange = {
@@ -52,7 +62,7 @@ export default function Header({}: Props) {
 					value={searchInput}
 					onChange={(e) => setSearchInput(e.target.value)}
 					type="text"
-					placeholder="Start your search"
+					placeholder={placeholder || 'Start your search'}
 					className="flex-grow pl-5 bg-transparent outline-none text-sm text-gray-600 placeholder-gray-400"
 				/>
 				<MagnifyingGlassIcon className="hidden md:inline-flex h-8 w-8 bg-red-400 text-white rounded-full p-2 cursor-pointer md:mx-2" />
