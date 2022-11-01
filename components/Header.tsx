@@ -8,7 +8,7 @@ import { DateRange, DateRangePicker, DateRangePickerProps, DateRangeProps, Range
 import { useRouter } from 'next/router'
 
 type Props = {
-	placeholder: string
+	placeholder?: string
 }
 
 export default function Header({ placeholder }: Props) {
