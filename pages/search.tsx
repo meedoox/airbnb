@@ -3,10 +3,26 @@ import React from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import { format } from 'date-fns'
+import InfoCard from '../components/InfoCard'
 
-type Props = {}
+type Booking = {
+	description: string
+	img: string
+	lat: number
+	location: string
+	long: number
+	price: string
+	star: number
+	title: string
+	total: string
+}
 
-export default function Search({}: Props) {
+type Props = {
+	searchResults: Booking[]
+}
+
+export default function Search({ searchResults }: Props) {
+	console.log(searchResults)
 	const router = useRouter()
 	const { location, startDate, endDate, noOfGuests } = router.query
 
@@ -32,9 +48,33 @@ export default function Search({}: Props) {
 						<p className="button">Rooms and Beds</p>
 						<p className="button">More Filters</p>
 					</div>
+					<div className="flex flex-col">
+						{searchResults.map(({ img, description, location, title, star, price, total }, index) => (
+							<InfoCard
+								key={index}
+								img={img}
+								description={description}
+								location={location}
+								price={price}
+								total={total}
+								title={title}
+								star={star}
+							/>
+						))}
+					</div>
 				</section>
 			</main>
 			<Footer />
 		</div>
 	)
+}
+
+export async function getServerSideProps() {
+	const searchResults = await fetch('https://www.jsonkeeper.com/b/5NPS').then((res) => res.json())
+
+	return {
+		props: {
+			searchResults,
+		},
+	}
 }
