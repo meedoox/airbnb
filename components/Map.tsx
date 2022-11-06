@@ -1,5 +1,5 @@
 import React, { SetStateAction, useState } from 'react'
-import ReactMapGL, { Marker, Popup } from 'react-map-gl'
+import ReactMapGL, { Marker, Popup, PointLike } from 'react-map-gl'
 import getCenter from 'geolib/es/getCenter'
 
 type Viewport = { width?: string; height?: string; latitude: number; longitude: number; zoom: number }
@@ -48,13 +48,13 @@ function Map({ searchResults }: Props) {
 			{...viewport}
 			onMove={(nextMove) => setViewport(nextMove.viewState)}
 		>
-			{searchResults.map((result) => (
+			{/*searchResults.map((result) => (
 				<div key={result.long}>
 					<Marker longitude={result.long} latitude={result.lat}>
 						<p className="cursor-pointer text-2xl animate-bounce">🤩</p>
 					</Marker>
 				</div>
-			))}
+			))*/}
 		</ReactMapGL>
 	)
 }
